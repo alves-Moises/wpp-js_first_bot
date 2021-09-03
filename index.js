@@ -1,5 +1,7 @@
 const qrcode = require('qrcode-terminal');
 const { Client } = require('whatsapp-web.js');
+const {math} = require("./math.js")
+
 
 //session
 const fs = require('fs');
@@ -33,12 +35,24 @@ client.on('ready', () => {
 });
 
 
+
+// ========== bot Begin ================
 client.on('message', message => {
+    let msg = message.body.toLowerCase().trim()
+    var prefix = '!'
+
+    commandList = {
+        'ping': 'pong!' ? msg == prefix + 'ping': '',
+        'math': math.math(a, b, signal) ? msg.startSwith(prefix + 'math'): '' 
+    }
+
    if(messageLower.body == 'ping') {
     message.reply('pong!')
    }
 
+
 })
+// ============End Bot=========================
 
 
 
