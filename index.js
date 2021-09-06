@@ -56,9 +56,10 @@ client.on('message', message => {
         client.sendMessage(message.from, commandList[msg[0]]);
     } 
 
-   if(messageLower.body == 'ping') {
-    message.reply('pong!')
-   }
+    if (msg[0] == "hello"){
+        message.reply("hello")
+        client.sendMessage(MessageChannel, msg)
+    }
 
 
 })
