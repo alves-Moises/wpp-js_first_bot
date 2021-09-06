@@ -41,11 +41,14 @@ client.on('message', message => {
     let msg = message.body.toLowerCase().trim()
     var prefix = '!'
     console.log(msg)
+
+    // ==== commandList Dict ====
     var commandList = {
         'ping': 'pong!',
         'math': math.math(msg.substring(6)) ? msg.substring(1).startsWith(prefix + 'math') : '' 
     }
     
+    // =========== console consolem message =================
     console.log(`{message.author}: {msg}`)
     console.log(`{message.author}: {message.body}`)
 
