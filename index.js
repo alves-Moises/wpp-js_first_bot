@@ -38,7 +38,7 @@ client.on('ready', () => {
 
 // ========== bot Begin ================
 client.on('message', message => {
-    let msg = message.body.toLowerCase().trim()
+    var msg = message.body.toLowerCase().trim().split(" ") //formating command string
     var prefix = '!'
     console.log(msg)
 
