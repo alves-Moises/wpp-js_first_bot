@@ -49,10 +49,12 @@ client.on('message', message => {
     console.log(`{message.author}: {msg}`)
     console.log(`{message.author}: {message.body}`)
 
-    commandList = {
-        'ping': 'pong!' ? msg == prefix + 'ping': '',
-        'math': math.math(a, b, signal) ? msg.startSwith(prefix + 'math'): '' 
-    }
+
+    // ================ Message in dict =================
+    if (msg.substring(1).split(" "[0]) in commandList){
+        console.log(`Command from message.user`)
+        client.sendMessage(message.from, commandList[msg[0]]);
+    } 
 
    if(messageLower.body == 'ping') {
     message.reply('pong!')
