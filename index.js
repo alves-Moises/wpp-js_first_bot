@@ -1,24 +1,28 @@
 const qrcode = require('qrcode-terminal');
 const { Client } = require('whatsapp-web.js');
-const {math} = require("./math.js")
+const {math} = require("./math.js");
 
 
 //session
 const fs = require('fs');
+const { stringify } = require('querystring');
 const SESSION_FILE_PATH = './session/session.json';
 
 //load session files
 let sessionData;
+
+
+
 if(fs.existsSync(SESSION_FILE_PATH)) {
     sessionData = require(SESSION_FILE_PATH)
+}else{
+    client.on('qr', qr => {
+        qrcode.generate(qr, {small: true});
+    })
 }
-
 const client = new Client({
     session: sessionData
 });
-// client.on('qr', qr => {
-//     qrcode.generate(qr, {small: true});
-// });
 
 //saving autenticated session
 client.on('authenticated', (session)=>{
@@ -38,35 +42,35 @@ client.on('ready', () => {
 
 // ========== bot Begin ================
 client.on('message', message => {
-    var msg = message.body.toLowerCase().trim().split(" ") //formating command string
+    var msg = message.body.toLowerCase().split(" ") //formating command string
     var prefix = '!'
-    console.log(msg)
+    console.log(message.from, msg, "\"n", MessageChannel)
 
     // ==== commandList Dict ====
-    var commandList = {
+    const commandList = {
         'ping': 'pong!',
-        'math': math.math(msg.substring(6)) ? msg.substring(1).startsWith(prefix + 'math') : '' 
+        'math': math.math(msg) ? msg[0].startsWith(prefix + 'math') : '' 
     }
-    
+    console.log(message.author)
+    console.error(message.body)
     // =========== console consolem message =================
-    console.log(`{message.author}: {msg}`)
-    console.log(`{message.author}: {message.body}`)
+    // console.log(`{message.author}: {msg}`)
+    // console.log(`{message.author}: {message.body}`)
 
 
     // ================ Message in dict =================
-    if (msg.substring(1).split(" "[0]) in commandList){
-        console.log(`Command from message.user`)
-        client.sendMessage(message.from, commandList[msg[0]]);
-    } 
+    // if (bool(commandList[msg[0].subString(1)])){
+    //     console.log(`Command from message.user`)
+    //     client.sendMessage(`{message.from} {commandList[msg[0]]}`);
+    // } 
 
-    if (msg[0] == "hello"){
-        message.reply("hello")
-        client.sendMessage(MessageChannel, msg)
-    }
-
+    // if (message.body == "hello"){
+    //     message.reply("hello")
+    //     client.sendMessage(MessageChannel, msg)
+    // }
 
 })
-// ============End Bot=========================
+// ============End Bot=========================""
 
 
 
